@@ -152,14 +152,18 @@
 
 #![deny(missing_docs)]
 
+#[cfg(feature = "serde")]
+#[macro_use]
+extern crate serde_sgx;
+
 use std::ops::{Index, IndexMut};
 
 #[cfg(feature = "serde")]
-use serde::{Deserialize, Serialize};
+use serde_sgx::{Deserialize, Serialize};
 
 /// A fixed sized two-dimensional array.
 #[derive(Debug, Clone, Eq, PartialEq)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde_sgx", derive(Serialize, Deserialize))]
 pub struct Array2D<T> {
     array: Vec<T>,
     num_rows: usize,
